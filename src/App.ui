@@ -18,6 +18,19 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="3">
+     <spacer name="horizontalSpacer_2">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
     <item row="0" column="0">
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
@@ -95,7 +108,7 @@
        </layout>
       </item>
       <item>
-       <widget class="QListView" name="list_source">
+       <widget class="SourceList" name="list_source">
         <property name="minimumSize">
          <size>
           <width>300</width>
@@ -108,22 +121,28 @@
           <height>1000</height>
          </size>
         </property>
+        <property name="showDropIndicator" stdset="0">
+         <bool>false</bool>
+        </property>
+        <property name="selectionMode">
+         <enum>QAbstractItemView::ExtendedSelection</enum>
+        </property>
+        <property name="sortingEnabled">
+         <bool>false</bool>
+        </property>
        </widget>
       </item>
      </layout>
     </item>
     <item row="0" column="1">
-     <spacer name="horizontalSpacer_2">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
+     <widget class="QTextBrowser" name="brws_info"/>
+    </item>
+    <item row="0" column="2">
+     <widget class="ToolInfo" name="tool_info">
+      <property name="text">
+       <string>Info</string>
       </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>40</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
+     </widget>
     </item>
    </layout>
   </widget>
@@ -151,6 +170,22 @@
    </property>
   </action>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>SourceList</class>
+   <extends>QListWidget</extends>
+   <header>SourceList.hpp</header>
+   <slots>
+    <slot>onAddSource()</slot>
+    <slot>onRemoveSource()</slot>
+   </slots>
+  </customwidget>
+  <customwidget>
+   <class>ToolInfo</class>
+   <extends>QPushButton</extends>
+   <header>ToolInfo.hpp</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="../resources/icons.qrc"/>
  </resources>
@@ -168,6 +203,38 @@
     <hint type="destinationlabel">
      <x>399</x>
      <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pbtn_add_source</sender>
+   <signal>clicked()</signal>
+   <receiver>list_source</receiver>
+   <slot>onAddSource()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>23</x>
+     <y>68</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>209</x>
+     <y>445</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pbtn_remove_source</sender>
+   <signal>clicked()</signal>
+   <receiver>list_source</receiver>
+   <slot>onRemoveSource()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>53</x>
+     <y>68</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>209</x>
+     <y>445</y>
     </hint>
    </hints>
   </connection>

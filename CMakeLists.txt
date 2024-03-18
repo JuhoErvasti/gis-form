@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(src VERSION 0.1 LANGUAGES CXX)
+project(gis-form VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
@@ -17,21 +17,27 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
 set(PROJECT_SOURCES
         src/main.cpp
         src/App.cpp
-        src/App.h
+        src/App.hpp
         src/App.ui
+        src/SourceList.cpp
+        src/SourceList.hpp
+        src/ToolInfo.cpp
+        src/ToolInfo.hpp
         resources/icons.qrc
 )
 
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src)
+
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-    qt_add_executable(src
+    qt_add_executable(gis-form
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
     )
 endif()
 
-target_link_libraries(src PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(gis-form PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 
-set_target_properties(src PROPERTIES
+set_target_properties(gis-form PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
@@ -40,5 +46,5 @@ set_target_properties(src PROPERTIES
 )
 
 if(QT_VERSION_MAJOR EQUAL 6)
-    qt_finalize_executable(src)
+    qt_finalize_executable(gis-form)
 endif()
